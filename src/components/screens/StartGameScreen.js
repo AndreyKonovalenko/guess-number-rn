@@ -11,6 +11,8 @@ import {
 import Card from '../Card';
 import Colors from '../../constants/colors';
 import Input from '../Input';
+import NumberContainer from '../NumberContainer';
+
 const StartGameScreen = props => {
   const [enterdValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
@@ -38,12 +40,19 @@ const StartGameScreen = props => {
     setConfirmed(true);
     setSelectedNubmer(chosenNumber);
     setEnteredValue(''); // this will execute in the next rendering so we can still access to enteredValue
+    Keyboard.dismiss();
   };
 
   let confirmedOutput;
 
   if (confirmed) {
-    confirmedOutput = <Text> ChosenNumberis : {selectedNubmer}</Text>;
+    confirmedOutput = (
+      <Card style={styles.summaryContainer}>
+        <Text>You selected</Text>
+        <NumberContainer>{selectedNubmer}</NumberContainer>
+        <Button title='START GAME' />
+      </Card>
+    );
   }
 
   return (
@@ -112,6 +121,10 @@ const styles = StyleSheet.create({
   input: {
     width: 50,
     textAlign: 'center'
+  },
+  summaryContainer: {
+    marginTop: 20,
+    alignItems: 'center'
   }
 });
 
