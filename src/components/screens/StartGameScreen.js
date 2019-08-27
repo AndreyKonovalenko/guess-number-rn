@@ -7,14 +7,14 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert
-}
-from 'react-native';
+} from 'react-native';
 import Card from '../Card';
 import Colors from '../../constants/colors';
 import Input from '../Input';
 import NumberContainer from '../NumberContainer';
 import BodyText from '../BodyText';
 import TitleText from '../TitleText';
+import MainButton from '../MainButton';
 
 const StartGameScreen = props => {
   const [enterdValue, setEnteredValue] = useState('');
@@ -35,7 +35,8 @@ const StartGameScreen = props => {
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         'Invalid number',
-        'Number has to be a number between 1 and 99!', [{ text: 'Okey', style: 'destructive', onPress: restInputHndler }]
+        'Number has to be a number between 1 and 99!',
+        [{ text: 'Okey', style: 'destructive', onPress: restInputHndler }]
       );
       return;
     }
@@ -52,10 +53,9 @@ const StartGameScreen = props => {
       <Card style={styles.summaryContainer}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button
-          title='START GAME'
-          onPress={() => props.onStartGame(selectedNumber)}
-        />
+        <MainButton onUserPress={() => props.onStartGame(selectedNumber)}>
+          START GAME
+        </MainButton>
       </Card>
     );
   }

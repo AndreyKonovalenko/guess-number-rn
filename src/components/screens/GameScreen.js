@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import NumberContainer from '../NumberContainer';
 import Card from '../Card';
-import DefaultStyles from '../../constants/default-styles' // this is for example purpose
-
+import DefaultStyles from '../../constants/default-styles'; // this is for example purpose
+import MainButton from '../MainButton';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -12,8 +13,7 @@ const generateRandomBetween = (min, max, exclude) => {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
   if (rndNum === exclude) {
     return generateRandomBetween(min, max, exclude);
-  }
-  else {
+  } else {
     return rndNum;
   }
 };
@@ -46,8 +46,7 @@ const GameScreen = props => {
     }
     if (direction === 'lower') {
       currentHigh.current = currentGuess;
-    }
-    else {
+    } else {
       currentLow.current = currentGuess;
     }
 
@@ -64,11 +63,12 @@ const GameScreen = props => {
       <Text style={DefaultStyles.title}> Opponent's Guess </Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-        <Button title='LOWER' onPress={nextGuessHandler.bind(this, 'lower')} />
-        <Button
-          title='GREATER'
-          onPress={nextGuessHandler.bind(this, 'greater')}
-        />
+        <MainButton onUserPress={nextGuessHandler.bind(this, 'lower')}>
+          <Ionicons name='md-remove' size={24} color='white' />
+        </MainButton>
+        <MainButton onUserPress={nextGuessHandler.bind(this, 'greater')}>
+          <Ionicons name='md-add' size={24} color='white' />
+        </MainButton>
       </Card>
     </View>
   );
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     maxWidth: '80%'
-  },
+  }
 });
 
 export default GameScreen;
