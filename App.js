@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 import Header from './src/components/Header';
 import StartGameScreen from './src/components/screens/StartGameScreen';
@@ -11,7 +12,8 @@ import GameOverScreen from './src/components/screens/GameOverScreen';
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    ...Ionicons.font
   });
 };
 
