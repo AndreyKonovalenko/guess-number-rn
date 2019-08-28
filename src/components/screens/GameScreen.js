@@ -81,8 +81,8 @@ const GameScreen = props => {
           <Ionicons name='md-add' size={24} color='white' />
         </MainButton>
       </Card>
-      <View style={styles.list}>
-        <ScrollView>
+      <View style={styles.listContainer}>
+        <ScrollView contentContainerStyle={styles.list}>
           {pastGuesses.map((element, index)=> renderListItem(element, pastGuesses.length - index))}
         </ScrollView>
       </View>
@@ -110,11 +110,17 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: 'white',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '60%'
   },
-  list: {
+  listContainer: {
     flex: 1, // this is necessary property for correct scrolling on Android
     width: '80%'
+  },
+  list: {
+    flexGrow: 1, // flexGrw  controls correct list behavior
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   }
 
 });
