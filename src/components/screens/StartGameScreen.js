@@ -6,8 +6,10 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert
-} from 'react-native';
+  Alert,
+  Dimensions
+}
+from 'react-native';
 import Card from '../Card';
 import Colors from '../../constants/colors';
 import Input from '../Input';
@@ -35,8 +37,7 @@ const StartGameScreen = props => {
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         'Invalid number',
-        'Number has to be a number between 1 and 99!',
-        [{ text: 'Okey', style: 'destructive', onPress: restInputHndler }]
+        'Number has to be a number between 1 and 99!', [{ text: 'Okey', style: 'destructive', onPress: restInputHndler }]
       );
       return;
     }
@@ -112,7 +113,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15
   },
   button: {
-    width: '40%'
+    // width: '40%'
+    width: Dimensions.get('window').width / 4
   },
   title: {
     fontSize: 20,
@@ -120,8 +122,9 @@ const styles = StyleSheet.create({
     fontFamily: 'open-sans-bold'
   },
   inputContainer: {
-    width: 300,
-    maxWidth: '80%',
+    width: '80%',
+    maxWidth: '95%',
+    minWidth: 300,
     alignItems: 'center'
   },
   input: {
