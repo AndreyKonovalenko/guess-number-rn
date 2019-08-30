@@ -10,8 +10,7 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView
-}
-from 'react-native';
+} from 'react-native';
 import Card from '../Card';
 import Colors from '../../constants/colors';
 import Input from '../Input';
@@ -24,9 +23,9 @@ const StartGameScreen = props => {
   const [enterdValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNubmer] = useState();
-  const [buttonWidth, setButtonWidth] = useState(Dimensions.get('window').width / 4);
-
-
+  const [buttonWidth, setButtonWidth] = useState(
+    Dimensions.get('window').width / 4
+  );
 
   const numberInputHandler = inputText => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ''));
@@ -38,7 +37,8 @@ const StartGameScreen = props => {
   };
 
   useEffect(() => {
-    const updateLayout = () => setButtonWidth(Dimensions.get('window').width / 4);
+    const updateLayout = () =>
+      setButtonWidth(Dimensions.get('window').width / 4);
     Dimensions.addEventListener('change', updateLayout);
     return () => {
       return Dimensions.removeEventListener('change', updateLayout);
@@ -50,7 +50,8 @@ const StartGameScreen = props => {
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         'Invalid number',
-        'Number has to be a number between 1 and 99!', [{ text: 'Okey', style: 'destructive', onPress: restInputHndler }]
+        'Number has to be a number between 1 and 99!',
+        [{ text: 'Okey', style: 'destructive', onPress: restInputHndler }]
       );
       return;
     }
@@ -76,42 +77,42 @@ const StartGameScreen = props => {
 
   return (
     <ScrollView>
-    <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={30}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.screen}>
-          <TitleText style={styles.title}>Start New Game</TitleText>
-          <Card style={styles.inputContainer}>
-            <BodyText>Select a Number</BodyText>
-            <Input
-              style={styles.input}
-              blurOnSubmit
-              autoCapitalize='none'
-              autoCorrect={false}
-              keyboardType='number-pad'
-              maxLength={2}
-              onChangeText={numberInputHandler}
-              value={enterdValue}
-            />
-            <View style={styles.buttonContainer}>
-              <View style={{width: buttonWidth}}>
-                <Button
-                  title='Reset'
-                  color={Colors.secondary}
-                  onPress={restInputHndler}
-                />
+      <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={30}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.screen}>
+            <TitleText style={styles.title}>Start New Game</TitleText>
+            <Card style={styles.inputContainer}>
+              <BodyText>Select a Number</BodyText>
+              <Input
+                style={styles.input}
+                blurOnSubmit
+                autoCapitalize='none'
+                autoCorrect={false}
+                keyboardType='number-pad'
+                maxLength={2}
+                onChangeText={numberInputHandler}
+                value={enterdValue}
+              />
+              <View style={styles.buttonContainer}>
+                <View style={{ width: buttonWidth }}>
+                  <Button
+                    title='Reset'
+                    color={Colors.secondary}
+                    onPress={restInputHndler}
+                  />
+                </View>
+                <View style={{ width: buttonWidth }}>
+                  <Button
+                    title='Confirm'
+                    color={Colors.secondary}
+                    onPress={confirmInputHandler}
+                  />
+                </View>
               </View>
-              <View style={{width: buttonWidth}}>
-                <Button
-                  title='Confirm'
-                  color={Colors.secondary}
-                  onPress={confirmInputHandler}
-                />
-              </View>
-            </View>
-          </Card>
-          {confirmedOutput}
-        </View>
-      </TouchableWithoutFeedback>
+            </Card>
+            {confirmedOutput}
+          </View>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </ScrollView>
   );
