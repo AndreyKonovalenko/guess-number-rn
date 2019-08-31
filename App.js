@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
@@ -50,8 +50,7 @@ export default function App() {
     content = (
       <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
     );
-  }
-  else if (guessRounds > 0) {
+  } else if (guessRounds > 0) {
     content = (
       <GameOverScreen
         userChoice={userNumber}
@@ -62,10 +61,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <Header title='GUESS A NUMBER APP' />
       {content}
-    </View>
+    </SafeAreaView>
   );
 }
 
